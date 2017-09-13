@@ -24,7 +24,7 @@ spec:
       - name: bookings
         image: fwblue/bookings:latest
         ports:
-        - containerPort: 80
+        - containerPort: 5001
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"
@@ -37,6 +37,9 @@ metadata:
   name: bookings
 spec:
   ports:
+  - protocol: TCP
+    port: 5001
+    targetPort: 80
   selector:
     name: bookings
   type: LoadBalancer
