@@ -11,7 +11,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
-
+using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace Bookings
 {
@@ -20,6 +21,16 @@ namespace Bookings
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.Development.json");
+
+            Configuration = builder.Build();
+
+            var value = Configuration.GetValue(typeof(string), "BookingManagerUrl");
+            Trace.WriteLine(value);
+
         }
 
         public IConfiguration Configuration { get; }
