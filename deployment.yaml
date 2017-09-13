@@ -24,6 +24,7 @@ spec:
       - name: bookings
         image: fwblue/bookings:latest
         ports:
+        - containerPort: 80
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"
